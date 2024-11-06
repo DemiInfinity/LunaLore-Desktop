@@ -76,13 +76,13 @@
               alt="Celestial Council Icon"
             /><span id="nav5"> Celestial Council</span></a
           >
-          <a href="#CosmicCodex"
+          <!-- <a href="#CosmicCodex"
             ><img
               href="#CosmicCodex"
               src="icons/CosmicCodexIcon.png"
               alt="Cosmic Codex Icon"
             /><span id="nav6"> Cosmic Codex</span></a
-          >
+          > -->
           <a id="logoutButton" class="logout-button"
             ><img src="icons/LogoutIcon.png" alt="Logout Icon" /><span
               id="nav7"
@@ -98,37 +98,59 @@
       </div>
     </div>
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const navLinks = document.querySelectorAll(".nav-links a");
-        const mainContent = document.querySelector(".main-content");
+  document.addEventListener("DOMContentLoaded", () => {
+    const navLinks = document.querySelectorAll(".nav-links a");
+    const mainContent = document.querySelector(".main-content");
 
-        navLinks.forEach((link) => {
-          link.addEventListener("click", (event) => {
-            event.preventDefault();
-            const page = event.target.getAttribute("href").replace("#", "");
-            loadPage(page);
-          });
-        });
-
-        async function loadPage(page) {
-          try {
-            // Load the corresponding HTML file from its folder
-            const response = await fetch(`pages/${page}/${page}.html`);
-            if (response.ok) {
-              const html = await response.text();
-              mainContent.innerHTML = html;
-            } else {
-              mainContent.innerHTML = `<h1>Page Not Found</h1><p>The requested page could not be found.</p>`;
-            }
-          } catch (error) {
-            mainContent.innerHTML = `<h1>Error</h1><p>There was an error loading the page.</p>`;
-          }
-        }
-
-        // Load default welcome page on initial load
-        loadPage("welcome");
+    navLinks.forEach((link) => {
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        const page = event.target.getAttribute("href").replace("#", "");
+        loadPage(page);
       });
-    </script>
+    });
+
+    async function loadPage(page) {
+      try {
+        // Load the corresponding HTML file from its folder
+        const response = await fetch(`pages/${page}/${page}.html`);
+        if (response.ok) {
+          const html = await response.text();
+          mainContent.innerHTML = html;
+
+          // Load the corresponding CSS file
+          loadCSS(`pages/${page}/${page}.css`);
+        } else {
+          mainContent.innerHTML = `<h1>Page Not Found</h1><p>The requested page could not be found.</p>`;
+        }
+      } catch (error) {
+        mainContent.innerHTML = `<h1>Error</h1><p>There was an error loading the page.</p>`;
+      }
+    }
+
+    function loadCSS(cssFilePath) {
+      // Check if the link tag for the CSS file already exists
+      let linkElement = document.getElementById('dynamic-css');
+
+      if (linkElement) {
+        // If link tag exists, update its href to the new CSS file
+        linkElement.href = cssFilePath;
+      } else {
+        // Create new link tag if it doesn't exist
+        linkElement = document.createElement('link');
+        linkElement.rel = 'stylesheet';
+        linkElement.type = 'text/css';
+        linkElement.id = 'dynamic-css';
+        linkElement.href = cssFilePath;
+        document.head.appendChild(linkElement);
+      }
+    }
+
+    // Load default welcome page on initial load
+    loadPage("welcome");
+  });
+</script>
+
 
     <script src="renderer.js"></script>
     <script src="logout.js"></script>

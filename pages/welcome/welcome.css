@@ -1,0 +1,42 @@
+.message-screen {
+  position: relative;  
+  margin-left: 20px;
+  width: 300px;
+  height: 400px;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #fbcb52;
+}
+
+.login-container {
+  text-align: center;
+}
+
+.welcome-logo img {
+  width: 100px;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.header {
+    justify-content: center;
+    text-align: center;
+    padding-top: 2.5%;
+}
+.message {
+    justify-content: center;
+    text-align: center;
+}
+.object-container {
+    display: flex;
+    justify-content: center;
+    padding-top: 2.5%;
+}

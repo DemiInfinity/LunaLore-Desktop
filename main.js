@@ -1,15 +1,16 @@
 // main.js
-
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
 
 let mainWindow;
 
 function createWindow() {
-  // Create the browser window
+  const isDev = process.env.NODE_ENV === 'development';
+
   mainWindow = new BrowserWindow({
-    width: 1500,
-    height: 800,
+    width: isDev ? 2100 : 1500,  // Wider window for development
+    height: 800,  // Taller window for development
+    resizable: isDev,           // Allow resizing only in development mode
     icon: path.join(__dirname, 'icons/LunaLoreWithoutText.png'),// Add the path to your app icon here
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
@@ -22,8 +23,9 @@ function createWindow() {
   mainWindow.loadFile("index.html");
 
   // Open the DevTools (optional)
-  mainWindow.webContents.openDevTools();
-
+  if (isDev) {
+    mainWindow.webContents.openDevTools();
+  }
   // Handle the 'closed' event for garbage collection
   mainWindow.on("closed", function () {
     mainWindow = null;
