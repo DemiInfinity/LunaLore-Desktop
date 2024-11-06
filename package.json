@@ -8,6 +8,49 @@
     "build": "cross-env NODE_ENV=production electron-builder",
     "test": "jest"
   },
+  "build": {
+    "appId": "com.DemiInfinity.lunalore",
+    "productName": "LunaLore",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "DemiInfinity",
+        "repo": "LunaLore"
+      }
+    ],
+    "win": {
+      "icon": "assets/icons/app-icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": ["x64", "ia32"]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowElevation": true,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "LunaLore",
+      "include": "customInstaller.nsh"
+    },
+    "mac": {
+      "icon": "assets/icons/app-icon.icns"
+    },
+    "linux": {
+      "icon": "assets/icons/app-icon.png"
+    },
+    "extraFiles": [
+      {
+        "from": "assets/icons",
+        "to": "assets/",
+        "filter": ["**/*"]
+      }
+    ]
+  },
   "keywords": [
     "LunaLore",
     "Vtuber",
@@ -17,13 +60,15 @@
   "license": "MIT",
   "devDependencies": {
     "cross-env": "^7.0.3",
-    "electron": "^33.0.2"
+    "electron": "^33.0.2",
+    "electron-builder": "^25.1.8"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "dotenv": "^16.4.5",
+    "electron-updater": "^6.3.9",
     "typescript": "^5.6.3"
   }
 }

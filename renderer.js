@@ -1,3 +1,5 @@
+const { ipcRenderer } = require('electron');
+
 function openAboutPopup() {
   const popup = window.open("", "About LunaLore", "width=400,height=300");
   popup.document.write(
@@ -10,6 +12,14 @@ function openAboutPopup() {
   popup.document.write("<p>Version: 0.0.1</p>");
   popup.document.write("</body></html>");
 }
+
+ipcRenderer.on('update_available', () => {
+  alert('A new update is available. It is now downloading...');
+});
+
+ipcRenderer.on('update_downloaded', () => {
+  alert('Update downloaded. The application will install the update on restart.');
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const toggleButton = document.getElementById("toggleButton");
@@ -46,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (sidebar.classList.contains("collapsed")) {
       toggleButton.innerHTML = '<i class="fas fa-bars"></i>'; // Hamburger icon when collapsed
       toggleButton.style.textAlign = "center";
-      logoImage.src = "icons/LunaLoreWithoutText.png"; // Change to smaller logo if needed
+      logoImage.src = "assets/img/LunaLoreWithoutText.png"; // Change to smaller logo if needed
       versionLink.textContent = "V0.0.1";
 
       nav1.hidden = true;
@@ -59,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       toggleButton.innerHTML = '<i class="fas fa-chevron-left"></i>'; // Arrow icon when expanded
       toggleButton.style.textAlign = "right";
-      logoImage.src = "icons/LunaLorelogo.png"; // Change back to larger logo if needed
+      logoImage.src = "assets/img/LunaLorelogo.png"; // Change back to larger logo if needed
       versionLink.textContent = "Version 0.0.1";
       
       nav1.hidden = false;

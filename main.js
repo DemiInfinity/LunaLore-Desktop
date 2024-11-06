@@ -1,5 +1,6 @@
 // main.js
 const { app, BrowserWindow } = require("electron");
+const { autoUpdater } = require('electron-updater');
 const path = require("path");
 
 let mainWindow;
@@ -11,7 +12,7 @@ function createWindow() {
     width: isDev ? 2100 : 1500,  // Wider window for development
     height: 800,  // Taller window for development
     resizable: isDev,           // Allow resizing only in development mode
-    icon: path.join(__dirname, 'icons/LunaLoreWithoutText.png'),// Add the path to your app icon here
+    icon: path.join(__dirname, 'assets/img/LunaLoreWithoutText.png'),// Add the path to your app icon here
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       nodeIntegration: true, // Enable Node integration for easier file access
@@ -21,6 +22,16 @@ function createWindow() {
 
   // Load the index.html file
   mainWindow.loadFile("index.html");
+  
+  autoUpdater.on('update-available', () => {
+    mainWindow.webContents.send('update_available');
+  });
+
+  autoUpdater.on('update-downloaded', () => {
+    mainWindow.webContents.send('update_downloaded');
+  });
+
+  if(!isDev) mainWindow.setMenu(null);
 
   // Open the DevTools (optional)
   if (isDev) {
@@ -48,3 +59,5 @@ app.on("activate", function () {
     createWindow();
   }
 });
+
+
