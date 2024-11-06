@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <title>LunaLore - Crafting Cosmic Stories for VTubers</title>
+  </head>
+  <body>
+    <script>
+      // Redirect to login page if user is not logged in
+      document.addEventListener("DOMContentLoaded", () => {
+        function getCookie(name) {
+          const value = `; ${document.cookie}`;
+          const parts = value.split(`; ${name}=`);
+          if (parts.length === 2) return parts.pop().split(";").shift();
+        }
+
+        const isLoggedIn = localStorage.getItem("isLoggedIn");
+        if (!isLoggedIn) {
+          window.location.href = "pages/login/login.html";
+        }
+      });
+    </script>
+    <div class="container">
+      <div id="sidebar" class="sidebar">
+        <button id="toggleButton" class="toggle-button">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="logo">
+          <img
+            id="logoImage"
+            src="icons/LunaLorelogo.png"
+            alt="LunaLore Logo"
+          />
+        </div>
+        <nav class="nav-links">
+          <a href="#welcome"
+            ><img
+              href="#welcome"
+              src="icons/HomeIcon.png"
+              alt="Home Icon"
+            /><span id="nav1"> Home</span></a
+          >
+          <a href="#CosmicForge"
+            ><img
+              href="#CosmicForge"
+              src="icons/CosmicForgeIcon.png"
+              alt="Cosmic Forge Icon"
+            /><span id="nav2"> Cosmic Forge</span></a
+          >
+          <a href="#Starmap"
+            ><img
+              href="#Starmap"
+              src="icons/StarmapIcon.png"
+              alt="Starmap Icon"
+            /><span id="nav3"> Starmap</span></a
+          >
+          <a href="#Observatory"
+            ><img
+              href="#Observatory"
+              src="icons/ObservatoryIcon.png"
+              alt="Observatory Icon"
+            />
+            <span id="nav4"> Observatory</span></a
+          >
+          <a href="#CelestialCouncil"
+            ><img
+              href="#CelestialCouncil"
+              src="icons/CelestialCouncilIcon.png"
+              alt="Celestial Council Icon"
+            /><span id="nav5"> Celestial Council</span></a
+          >
+          <a href="#CosmicCodex"
+            ><img
+              href="#CosmicCodex"
+              src="icons/CosmicCodexIcon.png"
+              alt="Cosmic Codex Icon"
+            /><span id="nav6"> Cosmic Codex</span></a
+          >
+          <a id="logoutButton" class="logout-button"
+            ><img src="icons/LogoutIcon.png" alt="Logout Icon" /><span
+              id="nav7"
+            >
+              Log Out</span
+            ></a
+          >
+        </nav>
+        <a id="versionLink" class="version-link" href="#">Version 0.0.1</a>
+      </div>
+      <div class="main-content">
+        <!-- Main content will be loaded here based on navigation -->
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const navLinks = document.querySelectorAll(".nav-links a");
+        const mainContent = document.querySelector(".main-content");
+
+        navLinks.forEach((link) => {
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            const page = event.target.getAttribute("href").replace("#", "");
+            loadPage(page);
+          });
+        });
+
+        async function loadPage(page) {
+          try {
+            // Load the corresponding HTML file from its folder
+            const response = await fetch(`pages/${page}/${page}.html`);
+            if (response.ok) {
+              const html = await response.text();
+              mainContent.innerHTML = html;
+            } else {
+              mainContent.innerHTML = `<h1>Page Not Found</h1><p>The requested page could not be found.</p>`;
+            }
+          } catch (error) {
+            mainContent.innerHTML = `<h1>Error</h1><p>There was an error loading the page.</p>`;
+          }
+        }
+
+        // Load default welcome page on initial load
+        loadPage("welcome");
+      });
+    </script>
+
+    <script src="renderer.js"></script>
+    <script src="logout.js"></script>
+  </body>
+</html>

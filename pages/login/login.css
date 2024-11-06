@@ -1,0 +1,92 @@
+body,
+html {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0d1b56, #4a2c8a);
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-screen {
+  width: 300px;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.message-screen {
+  margin-left: 20px;
+  width: 300px;
+  padding: 40px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+.login-container {
+  text-align: center;
+}
+
+.logo img {
+  width: 230px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #fbcb52;
+}
+
+#login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+#login-form input[type="text"],
+#login-form input[type="password"] {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  font-size: 16px;
+  background: #ffffff;
+  color: #0d1b56;
+}
+
+.login-button {
+  padding: 12px;
+  background: #ef81c1;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-button:hover {
+  background: #d96fa8;
+}
+
+.forgot-password,
+.create-account {
+  display: block;
+  margin-top: 10px;
+  color: #c7c9d3;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forgot-password:hover,
+.create-account:hover {
+  color: #fbcb52;
+}

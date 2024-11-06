@@ -1,0 +1,123 @@
+/* styles.css */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  height: 100%;
+  font-family: "Poppins", sans-serif;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  position: relative;
+  width: 250px;
+  background-color: #0d1b56; /* Cosmic Blue */
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  transition: width 0.3s ease-in-out;
+  overflow: hidden;
+  border-right: solid #4a2c8a;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 24px;
+  padding: 10px 10px 10px 5px;
+  cursor: pointer;
+  outline: none;
+  text-align: right;
+  transition: width 0.3s ease-in-out; /* Smooth transition */
+}
+
+.logo {
+  font-size: 24px;
+  text-align: center;
+  align-self: center;
+  padding: 10px 0;
+}
+.logo img {
+  width: 160px; /* Width for the expanded sidebar */
+  height: auto; /* Maintain the aspect ratio */
+  transition: width 0.3s ease-in-out; /* Smooth transition */
+}
+
+.sidebar.collapsed .logo img {
+  width: 50px; /* Width for collapsed sidebar */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.nav-links a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 20px;
+  transition: background 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: left;
+  align-items: left;
+}
+.nav-links a img {
+  width: 40px;
+  height: 40px;
+  transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+  background-color: #4a2c8a; /* Stardust Purple */
+}
+
+.sidebar.collapsed a {
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  gap: 0;
+}
+
+.sidebar.collapsed a img {
+  width: 50px; /* Width for collapsed sidebar */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  background: linear-gradient(135deg, #0d1b56, #4a2c8a);
+  color: #ffffff;
+  overflow-y: auto;
+  transition: margin-left 0.3s ease-in-out;
+}
+
+.version-link {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+  text-align: center;
+}
+
+.version-link:hover {
+  color: #4a2c8a; /* Aurora Gold on hover */
+}

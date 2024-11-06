@@ -1,0 +1,26 @@
+{
+  "name": "lunalore",
+  "version": "0.0.1",
+  "description": "LunaLore is a cosmic-themed platform for VTubers, offering tools to create and manage character lore, interactive storytelling, and real-time audience engagement. Users can craft characters, organize backstories, and let viewers participate in lore decisions, enhancing immersion and creativity. LunaLore brings your characters to life in an interactive and imaginative universe.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "jest"
+  },
+  "keywords": [
+    "LunaLore",
+    "Vtuber",
+    "StoryTelling"
+  ],
+  "author": "DemiInfinity",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^33.0.2"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "typescript": "^5.6.3"
+  }
+}
