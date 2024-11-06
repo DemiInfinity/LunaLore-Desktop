@@ -1,0 +1,101 @@
+/* Main container for side-by-side layout */
+.object-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Column layout for backstory and traits */
+.main-column {
+  display: flex;
+  flex-direction: column;
+  width: 70%; /* Controls the main column width */
+  gap: 20px;
+}
+
+.container-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Backstory Screen */
+.backstory-screen {
+  padding: 20px;
+  min-width: 750px;
+  height: 350px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  overflow-y: scroll;
+}
+
+/* Traits container aligned in a row under the backstory */
+.traits-container {
+  display: flex;
+  height: 240px;
+  flex-direction: row; /* Arrange traits screens in a single row */
+  gap: 20px;
+  justify-content: center; /* Center align the traits screens */
+}
+
+/* Individual traits screen styling */
+.traits-screen {
+  flex: 1; /* Make each traits screen take up equal space */
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* Character screen positioned to the side of the main column */
+.character-screen {
+  width: 500px; /* Adjust width as needed */
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  color: #fbcb52;
+}
+
+/* Styling for header text */
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #fbcb52;
+
+}
+
+.welcome-logo img {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Custom scrollbar for dark theme with gold accents */
+::-webkit-scrollbar {
+  width: 12px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.6); /* Background of the scrollbar track */
+  border-radius: 10px; /* Rounds the corners of the track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #fbcb52; /* Gold color for the scrollbar thumb */
+  border-radius: 10px; /* Rounds the corners of the thumb */
+  border: 3px solid rgba(0, 0, 0, 0.8); /* Adds padding around the thumb with the theme's dark color */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #f5b042; /* Slightly lighter gold on hover */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #fbcb52 rgba(0, 0, 0, 0.6);
+}
+

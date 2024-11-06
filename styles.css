@@ -15,18 +15,22 @@ html {
 
 .sidebar {
   position: relative;
-  width: 250px;
+  width: 220px;
+  min-width: 220px;
+  max-width: 220px;
   background-color: #0d1b56; /* Cosmic Blue */
   color: #ffffff;
   display: flex;
   flex-direction: column;
   transition: width 0.3s ease-in-out;
   overflow: hidden;
-  border-right: solid #4a2c8a;
+  border-right: 0.5px solid #4a2c8a;
 }
 
 .sidebar.collapsed {
   width: 60px;
+  min-width: 60px;
+  max-width: 60px;
 }
 
 .toggle-button {
@@ -39,6 +43,11 @@ html {
   outline: none;
   text-align: right;
   transition: width 0.3s ease-in-out; /* Smooth transition */
+}
+
+.sidebar.collapsed .toggle-button {
+  padding: 10px 0;
+
 }
 
 .logo {
@@ -83,6 +92,11 @@ html {
 
 .nav-links a:hover {
   background-color: #4a2c8a; /* Stardust Purple */
+}
+
+.nav-links a::selection {
+  background-color: #fbcb52;
+
 }
 
 .sidebar.collapsed a {

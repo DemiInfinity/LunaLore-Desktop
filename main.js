@@ -8,7 +8,7 @@ function createWindow() {
   const isDev = process.env.NODE_ENV === 'development';
 
   mainWindow = new BrowserWindow({
-    width: isDev ? 2100 : 1500,
+    width: isDev ? 1500 : 1500,
     height: 800,
     resizable: isDev,
     icon: path.join(__dirname, 'assets/img/LunaLoreWithoutText.png'),

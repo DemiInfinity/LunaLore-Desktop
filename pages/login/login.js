@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const isDevMode = process.env.NODE_ENV === 'development';
 
     // TODO: Remove this hard-coded validation once backend API is implemented
-    if (isDevMode && username === "dev" && password === "password") {
+    if (isDevMode && username === "demo" && password === "password") {
       localStorage.setItem("isLoggedIn", "true");
 
       // Simulate successful login by redirecting to the main dashboard
