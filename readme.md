@@ -1,7 +1,13 @@
 # LunaLore - Crafting Cosmic Stories for VTubers
 
-![LunaLore Logo](icons/LunaLorelogo.png)
-
+<img 
+    style="display: block; 
+           margin-left: auto;
+           margin-right: auto;
+           width: 50%;"
+    src="icons/LunaLorelogo.png" 
+    alt="Our logo">
+</img>
 ## About
 
 LunaLore is a cosmic-themed platform designed specifically for VTubers who want to bring their characters to life with rich backstories, interactive lore, and immersive storytelling. LunaLore offers an innovative suite of tools that help VTubers craft and manage their character lore, engage with their audiences, and create a unique universe for their fans to explore.
@@ -63,5 +69,5 @@ For more information, contact [Your Name](mailto:youremail@example.com).
 
 ## Acknowledgments
 
-- Icon artwork by [Artist Name](https://artistwebsite.com).
+- Icon artwork by ChatGPT.
 - Built with Electron and other amazing open source tools.
