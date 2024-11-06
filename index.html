@@ -3,11 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Preload main stylesheet for faster load -->
+    <link rel="preload" href="styles.css" as="style" />
     <link rel="stylesheet" href="styles.css" />
+
+    <!-- Async load for Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      onload="this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      />
+    </noscript>
 
     <title>LunaLore - Crafting Cosmic Stories for VTubers</title>
   </head>
@@ -15,18 +27,12 @@
     <script>
       // Redirect to login page if user is not logged in
       document.addEventListener("DOMContentLoaded", () => {
-        function getCookie(name) {
-          const value = `; ${document.cookie}`;
-          const parts = value.split(`; ${name}=`);
-          if (parts.length === 2) return parts.pop().split(";").shift();
-        }
-
-        const isLoggedIn = localStorage.getItem("isLoggedIn");
-        if (!isLoggedIn) {
+        if (!localStorage.getItem("isLoggedIn")) {
           window.location.href = "pages/login/login.html";
         }
       });
     </script>
+
     <div class="container">
       <div id="sidebar" class="sidebar">
         <button id="toggleButton" class="toggle-button">
@@ -37,122 +43,123 @@
             id="logoImage"
             src="assets/img/LunaLorelogo.png"
             alt="LunaLore Logo"
+            loading="lazy"
           />
         </div>
         <nav class="nav-links">
           <a href="#welcome"
-            ><img
-              href="#welcome"
-              src="assets/img/HomeIcon.png"
-              alt="Home Icon"
-            /><span id="nav1"> Home</span></a
+            ><img src="assets/img/HomeIcon.png" alt="Home Icon" /><span
+              id="nav1"
+              >Home</span
+            ></a
           >
           <a href="#CosmicForge"
             ><img
-              href="#CosmicForge"
               src="assets/img/CosmicForgeIcon.png"
               alt="Cosmic Forge Icon"
-            /><span id="nav2"> Cosmic Forge</span></a
+            /><span id="nav2">Cosmic Forge</span></a
           >
           <a href="#Starmap"
-            ><img
-              href="#Starmap"
-              src="assets/img/StarmapIcon.png"
-              alt="Starmap Icon"
-            /><span id="nav3"> Starmap</span></a
+            ><img src="assets/img/StarmapIcon.png" alt="Starmap Icon" /><span
+              id="nav3"
+              >Starmap</span
+            ></a
           >
           <a href="#Observatory"
             ><img
-              href="#Observatory"
-              src="assets/img/ObservatoryIcon.png"np
+              src="assets/img/ObservatoryIcon.png"
               alt="Observatory Icon"
-            />
-            <span id="nav4"> Observatory</span></a
+            /><span id="nav4">Observatory</span></a
           >
           <a href="#CelestialCouncil"
             ><img
-              href="#CelestialCouncil"
               src="assets/img/CelestialCouncilIcon.png"
               alt="Celestial Council Icon"
-            /><span id="nav5"> Celestial Council</span></a
+            /><span id="nav5">Celestial Council</span></a
           >
-           <a href="#CosmicCodex"
+          <a href="#CosmicCodex"
             ><img
-              href="#CosmicCodex"
               src="assets/img/CosmicCodexIcon.png"
               alt="Cosmic Codex Icon"
-            /><span id="nav6"> Cosmic Codex</span></a
+            /><span id="nav6">Cosmic Codex</span></a
           >
           <a id="logoutButton" class="logout-button"
             ><img src="assets/img/LogoutIcon.png" alt="Logout Icon" /><span
               id="nav7"
-            >
-              Log Out</span
+              >Log Out</span
             ></a
           >
         </nav>
         <a id="versionLink" class="version-link" href="#">Version 0.0.1</a>
       </div>
+
       <div class="main-content">
         <!-- Main content will be loaded here based on navigation -->
       </div>
     </div>
-    <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const navLinks = document.querySelectorAll(".nav-links a");
-    const mainContent = document.querySelector(".main-content");
 
-    navLinks.forEach((link) => {
-      link.addEventListener("click", (event) => {
-        event.preventDefault();
-        const page = event.target.getAttribute("href").replace("#", "");
-        loadPage(page);
-      });
-    });
+    <script defer>
+      document.addEventListener("DOMContentLoaded", () => {
+        const navLinks = document.querySelectorAll(".nav-links a");
+        const mainContent = document.querySelector(".main-content");
+        const pageCache = {};
 
-    async function loadPage(page) {
-      try {
-        // Load the corresponding HTML file from its folder
-        const response = await fetch(`pages/${page}/${page}.html`);
-        if (response.ok) {
-          const html = await response.text();
-          mainContent.innerHTML = html;
+        navLinks.forEach((link) => {
+          link.addEventListener("click", async (event) => {
+            event.preventDefault();
+            const page = event.target
+              .closest("a")
+              .getAttribute("href")
+              .replace("#", "");
+            loadPage(page);
+          });
+        });
 
-          // Load the corresponding CSS file
-          loadCSS(`pages/${page}/${page}.css`);
-        } else {
-          mainContent.innerHTML = `<h1>Page Not Found</h1><p>The requested page could not be found.</p>`;
+        async function loadPage(page) {
+          if (pageCache[page]) {
+            mainContent.innerHTML = pageCache[page];
+            loadCSS(`pages/${page}/${page}.css`);
+            return;
+          }
+
+          try {
+            const response = await fetch(`pages/${page}/${page}.html`);
+            if (response.ok) {
+              const html = await response.text();
+              mainContent.innerHTML = html;
+              pageCache[page] = html;
+              loadCSS(`pages/${page}/${page}.css`);
+            } else {
+              mainContent.innerHTML =
+                "<h1>Page Not Found</h1><p>The requested page could not be found.</p>";
+            }
+          } catch (error) {
+            mainContent.innerHTML =
+              "<h1>Error</h1><p>There was an error loading the page.</p>";
+          }
         }
-      } catch (error) {
-        mainContent.innerHTML = `<h1>Error</h1><p>There was an error loading the page.</p>`;
-      }
-    }
 
-    function loadCSS(cssFilePath) {
-      // Check if the link tag for the CSS file already exists
-      let linkElement = document.getElementById('dynamic-css');
+        function loadCSS(cssFilePath) {
+          let linkElement = document.getElementById("dynamic-css");
 
-      if (linkElement) {
-        // If link tag exists, update its href to the new CSS file
-        linkElement.href = cssFilePath;
-      } else {
-        // Create new link tag if it doesn't exist
-        linkElement = document.createElement('link');
-        linkElement.rel = 'stylesheet';
-        linkElement.type = 'text/css';
-        linkElement.id = 'dynamic-css';
-        linkElement.href = cssFilePath;
-        document.head.appendChild(linkElement);
-      }
-    }
+          if (linkElement) {
+            linkElement.href = cssFilePath;
+          } else {
+            linkElement = document.createElement("link");
+            linkElement.rel = "stylesheet";
+            linkElement.id = "dynamic-css";
+            linkElement.href = cssFilePath;
+            document.head.appendChild(linkElement);
+          }
+        }
 
-    // Load default welcome page on initial load
-    loadPage("welcome");
-  });
-</script>
+        // Load default welcome page
+        loadPage("welcome");
+      });
+    </script>
 
-
-    <script src="renderer.js"></script>
-    <script src="logout.js"></script>
+    <!-- Load essential scripts at the end of the body -->
+    <script src="renderer.js" defer></script>
+    <script src="logout.js" defer></script>
   </body>
 </html>

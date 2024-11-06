@@ -1,4 +1,3 @@
-// main.js
 const { app, BrowserWindow } = require("electron");
 const { autoUpdater } = require('electron-updater');
 const path = require("path");
@@ -9,55 +8,59 @@ function createWindow() {
   const isDev = process.env.NODE_ENV === 'development';
 
   mainWindow = new BrowserWindow({
-    width: isDev ? 2100 : 1500,  // Wider window for development
-    height: 800,  // Taller window for development
-    resizable: isDev,           // Allow resizing only in development mode
-    icon: path.join(__dirname, 'assets/img/LunaLoreWithoutText.png'),// Add the path to your app icon here
+    width: isDev ? 2100 : 1500,
+    height: 800,
+    resizable: isDev,
+    icon: path.join(__dirname, 'assets/img/LunaLoreWithoutText.png'),
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
-      nodeIntegration: true, // Enable Node integration for easier file access
-      contextIsolation: false, // Disable context isolation to allow access to Node APIs in renderer
+      nodeIntegration: true,
+      contextIsolation: false,
     },
   });
 
-  // Load the index.html file
   mainWindow.loadFile("index.html");
-  
-  autoUpdater.on('update-available', () => {
-    mainWindow.webContents.send('update_available');
-  });
 
-  autoUpdater.on('update-downloaded', () => {
-    mainWindow.webContents.send('update_downloaded');
-  });
+  if (!isDev) mainWindow.setMenu(null);
 
-  if(!isDev) mainWindow.setMenu(null);
-
-  // Open the DevTools (optional)
   if (isDev) {
     mainWindow.webContents.openDevTools();
   }
-  // Handle the 'closed' event for garbage collection
+
   mainWindow.on("closed", function () {
     mainWindow = null;
   });
 }
 
-// This method will be called when Electron has finished initialization
-app.on("ready", createWindow);
+// Defer `autoUpdater` until window is fully loaded in production
+app.on("ready", () => {
+  createWindow();
+  if (process.env.NODE_ENV !== 'development') {
+    // Start auto-updater after the main window is created
+    autoUpdater.checkForUpdates();
+  }
+});
 
-// Quit when all windows are closed
+// Listen for `autoUpdater` events only if in production
+if (process.env.NODE_ENV !== 'development') {
+  autoUpdater.on('update-available', () => {
+    mainWindow?.webContents.send('update_available');
+  });
+
+  autoUpdater.on('update-downloaded', () => {
+    mainWindow?.webContents.send('update_downloaded');
+  });
+}
+
+// Handle all windows closed
 app.on("window-all-closed", function () {
   if (process.platform !== "darwin") {
     app.quit();
   }
 });
 
-// Recreate the window when the app is reactivated (macOS specific behavior)
 app.on("activate", function () {
   if (mainWindow === null) {
     createWindow();
   }
 });
-
-

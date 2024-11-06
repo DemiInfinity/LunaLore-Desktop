@@ -1,10 +1,10 @@
 window.addEventListener("DOMContentLoaded", () => {
-  const replaceText = (selector, text) => {
-    const element = document.getElementById(selector);
-    if (element) element.innerText = text;
-  };
-
-  for (const type of ["chrome", "node", "electron"]) {
-    replaceText(`${type}-version`, process.versions[type]);
-  }
+  // Defer non-essential work until the browser is idle
+  requestIdleCallback(() => {
+    const versions = ["chrome", "node", "electron"];
+    versions.forEach((type) => {
+      const element = document.getElementById(`${type}-version`);
+      if (element) element.innerText = process.versions[type];
+    });
+  });
 });

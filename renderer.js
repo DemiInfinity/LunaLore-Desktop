@@ -2,83 +2,80 @@ const { ipcRenderer } = require('electron');
 
 function openAboutPopup() {
   const popup = window.open("", "About LunaLore", "width=400,height=300");
-  popup.document.write(
-    "<html><head><title>About LunaLore</title></head><body>"
-  );
-  popup.document.write("<h1>About LunaLore</h1>");
-  popup.document.write(
-    "<p>LunaLore is a platform designed for VTubers to create and manage their character lore, interact with audiences, and build immersive storytelling experiences.</p>"
-  );
-  popup.document.write("<p>Version: 0.0.1</p>");
-  popup.document.write("</body></html>");
+  const content = `
+    <html>
+      <head><title>About LunaLore</title></head>
+      <body>
+        <h1>About LunaLore</h1>
+        <p>LunaLore is a platform designed for VTubers to create and manage their character lore, interact with audiences, and build immersive storytelling experiences.</p>
+        <p>Version: 0.0.1</p>
+      </body>
+    </html>
+  `;
+  popup.document.write(content);
 }
 
-ipcRenderer.on('update_available', () => {
-  alert('A new update is available. It is now downloading...');
-});
+// Lazy-load IPC events to avoid impacting initial load time
+function lazyLoadIpcEvents() {
+  if (!ipcRenderer.listenerCount('update_available')) {
+    ipcRenderer.on('update_available', () => {
+      alert('A new update is available. It is now downloading...');
+    });
 
-ipcRenderer.on('update_downloaded', () => {
-  alert('Update downloaded. The application will install the update on restart.');
-});
+    ipcRenderer.on('update_downloaded', () => {
+      alert('Update downloaded. The application will install the update on restart.');
+    });
+  }
+}
 
-document.addEventListener("DOMContentLoaded", () => {
+// Optimized function to initialize event listeners
+function initializeEventListeners() {
+  // Lazy-load IPC events after DOMContentLoaded for improved performance
+  lazyLoadIpcEvents();
+
   const toggleButton = document.getElementById("toggleButton");
   const sidebar = document.getElementById("sidebar");
   const logoImage = document.getElementById("logoImage");
   const versionLink = document.getElementById("versionLink");
-  const nav1 = document.getElementById("nav1");
-  const nav2 = document.getElementById("nav2");
-  const nav3 = document.getElementById("nav3");
-  const nav4 = document.getElementById("nav4");
-  const nav5 = document.getElementById("nav5");
-  const nav6 = document.getElementById("nav6");
-  const nav7 = document.getElementById("nav7");
+  const navElements = Array.from(document.querySelectorAll("#nav1, #nav2, #nav3, #nav4, #nav5, #nav6, #nav7"));
 
-  if (!toggleButton) {
-    console.error("Toggle button not found!");
+  if (!toggleButton || !sidebar) {
+    console.error(toggleButton ? "Sidebar not found!" : "Toggle button not found!");
+    return;
   }
 
-  if (!sidebar) {
-    console.error("Sidebar not found!");
-  }
+  // Deferred loading of logo images for faster initial rendering
+  const smallLogo = "assets/img/LunaLoreWithoutText.png";
+  const largeLogo = "assets/img/LunaLorelogo.png";
 
-  if (versionLink) {
-    versionLink.addEventListener("click", (event) => {
-      event.preventDefault();
-      openAboutPopup();
-    });
-  }
-
-  toggleButton.addEventListener("click", () => {
-    sidebar.classList.toggle("collapsed");
-
-    // Update the logo size for visual effect
-    if (sidebar.classList.contains("collapsed")) {
-      toggleButton.innerHTML = '<i class="fas fa-bars"></i>'; // Hamburger icon when collapsed
-      toggleButton.style.textAlign = "center";
-      logoImage.src = "assets/img/LunaLoreWithoutText.png"; // Change to smaller logo if needed
-      versionLink.textContent = "V0.0.1";
-
-      nav1.hidden = true;
-      nav2.hidden = true;
-      nav3.hidden = true;
-      nav4.hidden = true;
-      nav5.hidden = true;
-      nav6.hidden = true;
-      nav7.hidden = true;
-    } else {
-      toggleButton.innerHTML = '<i class="fas fa-chevron-left"></i>'; // Arrow icon when expanded
-      toggleButton.style.textAlign = "right";
-      logoImage.src = "assets/img/LunaLorelogo.png"; // Change back to larger logo if needed
-      versionLink.textContent = "Version 0.0.1";
-      
-      nav1.hidden = false;
-      nav2.hidden = false;
-      nav3.hidden = false;
-      nav4.hidden = false;
-      nav5.hidden = false;
-      nav6.hidden = false;
-      nav7.hidden = false;
-    }
+  // Handle version link click to open About popup
+  versionLink?.addEventListener("click", (event) => {
+    event.preventDefault();
+    openAboutPopup();
   });
+
+  // Sidebar toggle functionality
+  toggleButton.addEventListener("click", () => {
+    const isCollapsed = sidebar.classList.toggle("collapsed");
+    toggleButton.innerHTML = isCollapsed ? '<i class="fas fa-bars"></i>' : '<i class="fas fa-chevron-left"></i>';
+    toggleButton.style.textAlign = isCollapsed ? "center" : "right";
+    logoImage.src = isCollapsed ? smallLogo : largeLogo;
+    versionLink.textContent = isCollapsed ? "V0.0.1" : "Version 0.0.1";
+    navElements.forEach(nav => (nav.hidden = isCollapsed));
+  });
+}
+
+// Automatically initialize event listeners when DOM is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+  initializeEventListeners();
+
+  // Preload essential assets asynchronously after initial load
+  const preloadImage = new Image();
+  preloadImage.src = "assets/img/LunaLorelogo.png";  // Preload large logo for expanded state
 });
+
+// Export functions for testing
+module.exports = {
+  openAboutPopup,
+  initializeEventListeners
+};
