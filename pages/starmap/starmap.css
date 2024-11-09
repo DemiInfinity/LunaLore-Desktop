@@ -1,0 +1,11 @@
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #fbcb52;
+  }
+
+  .header {
+    justify-content: center;
+    text-align: center;
+    padding-top: 2.5%;
+}

@@ -2,7 +2,7 @@
 .object-container {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 10px;
   padding: 20px;
 }
 
@@ -22,13 +22,20 @@
 
 /* Backstory Screen */
 .backstory-screen {
-  padding: 20px;
+  padding:10px;
   min-width: 750px;
   height: 350px;
   background: rgba(0, 0, 0, 0.8);
-  border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.8);
+}
+.background-text {
+  height: 270px;
   overflow-y: scroll;
+  background: #120e2b;
+  border-top: 2px solid #4a2c8a;
+  border-bottom: 2px solid #4a2c8a;
+  padding:10px;
 }
 
 /* Traits container aligned in a row under the backstory */
@@ -63,29 +70,34 @@
 /* Styling for header text */
 h1 {
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   color: #fbcb52;
+}
 
+.header {
+  justify-content: center;
+  text-align: center;
 }
 
 .welcome-logo img {
-  width: 100%;
+  width: 90%;
   margin-top: 20px;
 }
 
 /* Custom scrollbar for dark theme with gold accents */
 ::-webkit-scrollbar {
   width: 12px; /* Width of the scrollbar */
+  padding: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.6); /* Background of the scrollbar track */
-  border-radius: 10px; /* Rounds the corners of the track */
+  background: transparent; /* Background of the scrollbar track */
+  border-radius: 20px; /* Rounds the corners of the track */
 }
 
 ::-webkit-scrollbar-thumb {
   background-color: #fbcb52; /* Gold color for the scrollbar thumb */
-  border-radius: 10px; /* Rounds the corners of the thumb */
+  border-radius: 20px; /* Rounds the corners of the thumb */
   border: 3px solid rgba(0, 0, 0, 0.8); /* Adds padding around the thumb with the theme's dark color */
 }
 

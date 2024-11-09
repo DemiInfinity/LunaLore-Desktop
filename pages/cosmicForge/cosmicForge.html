@@ -3,7 +3,13 @@
     <div class="container-items">
       <div id="backstory-screen" class="backstory-screen">
         <h1>Backstory</h1>
-        <p>
+        <button id="toggleEdit" onclick="EnableEditing()">Edit</button>
+        <div id="toolbar" class="toolbar" style="display: none;">
+          <button onclick="applyStyle('bold')">Bold</button>
+          <button onclick="applyStyle('italic')">Italic</button>
+          <button onclick="applyStyle('underline')">Underline</button>
+        </div>
+        <div id="backstoryEdit" class="background-text" contenteditable="false">
           In the year 7092, the multiverse is held together by a delicate
           balance maintained by the Celestial Order, an ancient organization
           tasked with safeguarding dimensional stability. Created in a hidden
@@ -47,7 +53,7 @@
           audience into a grand cosmic mystery. With her viewers at her side,
           Nyra Voss is determined to uncover the truth of her origins and shape
           the future of all dimensions.
-        </p>
+        </div>
       </div>
       <div class="traits-container">
         <div id="traits-screen" class="traits-screen">
@@ -69,7 +75,7 @@
               text-align: left; /* Ensures text aligns left within each column */
             }
           </style>
-          
+
           <ul class="traits-list">
             <li>Inquisitive</li>
             <li>Playful</li>
@@ -82,7 +88,6 @@
             <li>Resourceful</li>
             <li>Humorous</li>
           </ul>
-          
         </div>
         <div id="traits-screen" class="traits-screen">
           <h1>Abilities</h1>
@@ -103,7 +108,7 @@
               text-align: left; /* Ensures text aligns left within each column */
             }
           </style>
-          
+
           <ul class="abilities-list">
             <li>Dimensional Sight</li>
             <li>Phase Shift</li>
@@ -116,7 +121,6 @@
             <li>Cosmic Pulse</li>
             <li>Portal Creation (Limited)</li>
           </ul>
-          
         </div>
       </div>
     </div>

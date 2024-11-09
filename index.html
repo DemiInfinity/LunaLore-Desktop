@@ -118,6 +118,7 @@
           if (pageCache[page]) {
             mainContent.innerHTML = pageCache[page];
             loadCSS(`pages/${page}/${page}.css`);
+            loadJS(`pages/${page}/${page}.js`);
             return;
           }
 
@@ -128,6 +129,7 @@
               mainContent.innerHTML = html;
               pageCache[page] = html;
               loadCSS(`pages/${page}/${page}.css`);
+              loadJS(`pages/${page}/${page}.js`);
             } else {
               mainContent.innerHTML =
                 "<h1>Page Not Found</h1><p>The requested page could not be found.</p>";
@@ -149,6 +151,17 @@
             linkElement.id = "dynamic-css";
             linkElement.href = cssFilePath;
             document.head.appendChild(linkElement);
+          }
+        }
+
+        function loadJS(jsFilePath) {
+          if (!document.querySelector(`script[src="${jsFilePath}"]`)) {
+            const script = document.createElement("script");
+            script.src = jsFilePath;
+            script.type = "text/javascript";
+            script.async = true;
+            document.head.appendChild(script);
+            console.log(`Loading JavaScript file: ${jsFilePath}`);
           }
         }
 

@@ -116,7 +116,7 @@ html {
   padding: 20px;
   background: linear-gradient(135deg, #0d1b56, #4a2c8a);
   color: #ffffff;
-  overflow-y: auto;
+  overflow-y: hidden;
   transition: margin-left 0.3s ease-in-out;
 }
 
