@@ -2,14 +2,16 @@
   <div class="main-column">
     <div class="container-items">
       <div id="backstory-screen" class="backstory-screen">
-        <h1>Backstory</h1>
-        <button id="toggleEdit" onclick="EnableEditing()">Edit</button>
-        <div id="toolbar" class="toolbar" style="display: none;">
-          <button onclick="applyStyle('bold')">Bold</button>
-          <button onclick="applyStyle('italic')">Italic</button>
-          <button onclick="applyStyle('underline')">Underline</button>
+        <div style="display: inline-flex; width: 100%;">
+          <h1 style="top:43px; position:fixed;">Backstory</h1>
+          <div id="toolbar" class="toolbar" style="display: none; position:fixed; left: 790px; top: 64px;">
+            <button onclick="applyStyle('bold')">Bold</button>
+            <button onclick="applyStyle('italic')">Italic</button>
+            <button onclick="applyStyle('underline')">Underline</button>
+          </div>
+          <button id="toggleEdit" onclick="EnableEditing()" style="position:fixed; left: 963px; top: 64px;">Edit</button>
         </div>
-        <div id="backstoryEdit" class="background-text" contenteditable="false">
+        <div id="backstoryEdit" class="background-text" contenteditable="false" style="position: fixed; width: 725px; top: 103px;">
           In the year 7092, the multiverse is held together by a delicate
           balance maintained by the Celestial Order, an ancient organization
           tasked with safeguarding dimensional stability. Created in a hidden
