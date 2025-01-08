@@ -1,5 +1,7 @@
 # Custom License for LunaLore Desktop Application
 
+©Demi Taylor Nimmo, 2025. All Rights Reserved.
+
 ## License Terms
 
 The LunaLore Desktop Application and its source code are proprietary and protected under copyright law. By accessing, using, or copying this repository, you agree to the following terms:
