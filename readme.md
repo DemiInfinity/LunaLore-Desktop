@@ -1,73 +1,74 @@
-# LunaLore - Crafting Cosmic Stories for VTubers
+# 💻 **LunaLore Desktop**
 
-<img 
-    style="display: block; 
-           margin-left: auto;
-           margin-right: auto;
-           width: 50%;"
-    src="icons/LunaLorelogo.png" 
-    alt="Our logo">
-</img>
-## About
+Welcome to the **LunaLore Desktop Application**, a comprehensive tool for VTubers to manage their character lore, story arcs, and creative workflows. This application is currently **under development**, with the primary focus on the **Cosmic Forge** module.
 
-LunaLore is a cosmic-themed platform designed specifically for VTubers who want to bring their characters to life with rich backstories, interactive lore, and immersive storytelling. LunaLore offers an innovative suite of tools that help VTubers craft and manage their character lore, engage with their audiences, and create a unique universe for their fans to explore.
+---
 
-## Features
-- **Character Profiles**: Build detailed character profiles with customizable lore elements.
-- **Viewer Interaction**: Let audiences vote on story arcs, submit lore ideas, and engage with the character’s universe in real-time.
-- **AI-Powered Tools**: Use AI prompts for character development and storytelling ideas.
-- **Social Media Integration**: Tweet as your character to keep fans engaged between streams.
-- **Plugin Marketplace**: Enable custom plugins to expand LunaLore’s capabilities, tailored to each VTuber's needs.
+## 🚀 **Features**
 
-## Installation
+### **In Progress / To-Do**
+- **Cosmic Forge**: A robust tool for creating and managing VTuber character profiles and their lore.
+- **Lore Organization**: Features for building and structuring story arcs (upcoming).
+- **Viewer Interaction Tools**: Widgets for tracking and managing audience suggestions (planned).
+- **Offline Mode**: Access character data and lore without an internet connection (planned).
+- **AI Assistance**: Integrate AI-powered tools for generating creative ideas and lore (planned).
 
-Clone the repository:
-```sh
-$ git clone https://github.com/yourusername/lunalore.git
-```
+---
 
-Navigate to the project directory:
-```sh
-$ cd lunalore
-```
+## 🛠️ **Technologies Used**
 
-Install the dependencies:
-```sh
-$ npm install
-```
+- **Framework**: [Electron](https://www.electronjs.org/) for desktop application development.
+- **Frontend**: React with TypeScript.
+- **Backend Integration**: Works in sync with the [LunaLore API](https://api.lunalore.vercel.app/).
+- **Database**: IndexedDB for local offline data storage.
+- **Styling**: CSS Modules / TailwindCSS (specify the styling library used).
+- **Hosting for Backend Services**: Vercel and Supabase integration via the LunaLore API.
 
-Run the application:
-```sh
-$ npm start
-```
+---
 
-## Development
+## 📚 **Setup Instructions**
 
-To run the app in development mode:
-```sh
-$ npm run dev
-```
+### **Requirements**
+- Node.js (version 16 or above)
+- npm or yarn package manager
 
-## Build
+### **Steps**
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/lunalore-desktop.git
+	```
+2. Navigate to the project directory:
+   ```bash
+	cd lunalore-desktop
+	```
+3. Install dependencies:
+   ```bash
+	npm install	
+	```
+4. Start the application in development mode:
+   ```bash
+	npm run start
+	```
+5. Build the production version:
+   ```bash
+	npm run build
+	```
+## 📖 **Planned Features**
 
-To package the Electron app for distribution:
-```sh
-$ npm run build
-```
+There are no planned features at this time as the focus is currently on developing the **Cosmic Forge** module.
 
-## Contributing
+## 🔗 **Related Projects**
 
-Feel free to fork this repository, make improvements, and submit a pull request. Contributions are always welcome!
+- [LunaLore API](https://api.lunalore.app/) - The API powering the LunaLore platform. *(Live)*
+- [LunaLore Main Website](https://lunalore.app/) - The central hub for the LunaLore platform. *(In Development)*
+- [Celestial Council Viewer Platform](https://council.lunalore.app/) - A web-based application for viewers to interact with the LunaLore universe. *(Planned)*
 
-## License
+## 🌟 **Contributing**
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+At this time, the LunaLore Desktop Application is **not open for external collaboration** as it is still in active development.  
 
-## Contact
+However, feedback and suggestions are always welcome! Feel free to reach out if you have ideas for improvement or enhancements.
 
-For more information, contact [Your Name](mailto:youremail@example.com).
+## 📝 **License**
 
-## Acknowledgments
-
-- Icon artwork by ChatGPT.
-- Built with Electron and other amazing open source tools.
+This project is licensed under the MIT License.
